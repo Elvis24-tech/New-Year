@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Dynamic Website</title>
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #22c55e;
+      --bg: #f9fafb;
+      --text: #111827;
+      --card: #ffffff;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --text: #e5e7eb;
+      --card: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: 0.3s;
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: 0.3s;
+    }
+
+    header.scrolled {
+      background: var(--card);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+
+    .toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .hero button {
+      margin-top: 2rem;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 999px;
+      background: white;
+      color: #111;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+      transform: scale(1.05);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 5rem 2rem;
+    }
+
+    section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      opacity: 0.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="header">
+  <nav>
+    <strong>MyWebsite</strong>
+    <div>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <span class="toggle" id="themeToggle">🌙</span>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Build Stunning Web Experiences</h1>
+    <p>Modern design, smooth animations, and dynamic interactions using pure HTML, CSS, and JavaScript.</p>
+    <button id="openModal">Get Started</button>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Features</h2>
+  <div class="cards">
+    <div class="card">⚡ Fast & Responsive</div>
+    <div class="card">🎨 Modern Design</div>
+    <div class="card">🧠 Smart Interactions</div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <p style="text-align:center; max-width:700px; margin:auto;">
+    This website is built without frameworks — just clean HTML, CSS, and JavaScript —
+    showing how powerful the fundamentals can be.
+  </p>
+</section>
+
+<footer>
+  © 2026 · Designed with ❤️
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Welcome 🚀</h3>
+    <p>You just triggered a dynamic modal popup.</p>
+    <button onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+  // Navbar scroll effect
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 50);
+  });
+
+  // Modal
+  const modal = document.getElementById("modal");
+  document.getElementById("openModal").onclick = () => modal.classList.add("active");
+  function closeModal() { modal.classList.remove("active"); }
+
+  // Theme toggle
+  const toggle = document.getElementById("themeToggle");
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+  };
+
+  // Smooth scroll
+  document.querySelectorAll("a[href^='#']").forEach(anchor => {
+    anchor.addEventListener("click", e => {
+      e.preventDefault();
+      document.querySelector(anchor.getAttribute("href"))
+        .scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>
+
+</body>
+</html>
